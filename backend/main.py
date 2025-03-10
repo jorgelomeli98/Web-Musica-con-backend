@@ -55,6 +55,10 @@ async def obtener_canciones_de_artista(artista):
         return [cancion["name"] for cancion in canciones]
     return None
 
+@app.get("/")
+async def root():
+    return {"message": "Bienvenido a la API de música aleatoria"}
+
 @app.get("/artista-aleatorio")
 async def get_artista_aleatorio():
     artista = await obtener_artista_aleatorio()
