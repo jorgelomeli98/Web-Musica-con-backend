@@ -1,10 +1,14 @@
+import os
+from dotenv import load_dotenv
 import httpx
 from fastapi import FastAPI
 import random
 
 app = FastAPI()
 
-LASTFM_API_KEY = "" #Aqui va la API KEY de Last.fm
+load_dotenv()
+
+API_KEY = os.getenv("LASTFM_API_KEY")
 
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -26,8 +30,9 @@ def obtener_genero_aleatorio():
     return random.choice(generos)
 
 async def obtener_artista_aleatorio():
+    print(API_KEY)
     genero = obtener_genero_aleatorio()
-    url = f"https://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag={genero}&api_key={LASTFM_API_KEY}&format=json&limit=350"
+    url = f"https://ws.audioscrobbler.com/2.0/?method=tag.gettopartists&tag={genero}&api_key={API_KEY}&format=json&limit=350"
 
     async with httpx.AsyncClient() as client:
         response = await client.get(url)
@@ -39,7 +44,7 @@ async def obtener_artista_aleatorio():
     return None
 
 async def obtener_canciones_de_artista(artista):
-    url = f"https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist={artista}&api_key={LASTFM_API_KEY}&format=json&limit=5"
+    url = f"https://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist={artista}&api_key={API_KEY}&format=json&limit=5"
 
     async with httpx.AsyncClient() as client:
         response = await client.get(url)
