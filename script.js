@@ -3,7 +3,7 @@ const YOUTUBE_SEARCH_URL = "https://www.youtube.com/results?search_query=";
 
 async function obtenerArtistaAleatorio() {
     try {
-        const response = await fetch('https://web-musica-aleatoria.onrender.com/artista-aleatorio'); //127.0.0.1:8000 para pruebas locales
+        const response = await fetch('https://web-musica-aleatoria.onrender.com/artista-aleatorio');
         const data = await response.json();
         
         if (data.artista) {
@@ -21,7 +21,7 @@ async function obtenerArtistaAleatorio() {
 
 async function obtenerCancionDeArtista(artista) {
     try {
-        const response = await fetch(`https://web-musica-aleatoria.onrender.com/canciones/${artista}`); //127.0.0.1:8000 para pruebas locales
+        const response = await fetch(`https://web-musica-aleatoria.onrender.com/canciones/${artista}`);
         const data = await response.json();
 
         if (data.canciones && data.canciones.length > 0) {
@@ -46,5 +46,20 @@ document.getElementById('load-music').addEventListener('click', async () => {
     console.log(`Buscando en YouTube: ${cancion}`);
 
     
-    window.open(`${YOUTUBE_SEARCH_URL}${encodeURIComponent(cancion)}`, '_blank');
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    const searchQuery = encodeURIComponent(cancion);
+
+    if (isMobile) {
+        
+        window.location.href = `youtube://www.youtube.com/results?search_query=${searchQuery}`;
+        
+        
+        setTimeout(() => {
+            window.open(`${YOUTUBE_SEARCH_URL}${searchQuery}`, '_blank');
+        }, 500);
+    } else {
+        
+        window.open(`${YOUTUBE_SEARCH_URL}${searchQuery}`, '_blank');
+    }
 });
