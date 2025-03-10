@@ -45,19 +45,22 @@ document.getElementById('load-music').addEventListener('click', async () => {
 
     console.log(`Buscando en YouTube: ${cancion}`);
 
-    
+    const searchQuery = encodeURIComponent(cancion);
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    const searchQuery = encodeURIComponent(cancion);
-
     if (isMobile) {
-        
-        window.location.href = `youtube://www.youtube.com/results?search_query=${searchQuery}`;
-        
+        if (/Android/i.test(navigator.userAgent)) {
+            
+            window.location.href = `intent://www.youtube.com/results?search_query=${searchQuery}#Intent;package=com.google.android.youtube;scheme=https;end;`;
+        } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+            
+            window.location.href = `youtube://www.youtube.com/results?search_query=${searchQuery}`;
+        }
+
         
         setTimeout(() => {
             window.open(`${YOUTUBE_SEARCH_URL}${searchQuery}`, '_blank');
-        }, 500);
+        }, 800);
     } else {
         
         window.open(`${YOUTUBE_SEARCH_URL}${searchQuery}`, '_blank');
