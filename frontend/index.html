@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shuffle</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            color: white;
+            text-align: center;
+        }
+
+
+        #load-music {
+            width: 500px;
+            height: 500px;
+            background-color: #1DB954;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.3s ease;
+        }
+
+        #load-music:hover {
+            background-color: #17a74a;
+            transform: scale(1.1);
+        }
+
+        #load-music svg {
+            width: 200px;
+            height: 200px;
+            fill: white;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="load-music">
+        <img src="icons/shuffle.svg" alt="Icono Shuffle" width="200" height="200">
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
