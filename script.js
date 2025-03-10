@@ -43,26 +43,10 @@ document.getElementById('load-music').addEventListener('click', async () => {
     const cancion = await obtenerCancionDeArtista(artista);
     if (!cancion) return;
 
-    console.log(`Buscando en YouTube: ${cancion}`);
+    console.log(`Buscando en YouTube: ${artista} - ${cancion}`);
 
-    const searchQuery = encodeURIComponent(cancion);
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-    if (isMobile) {
-        if (/Android/i.test(navigator.userAgent)) {
-            
-            window.location.href = `intent://www.youtube.com/results?search_query=${searchQuery}#Intent;package=com.google.android.youtube;scheme=https;end;`;
-        } else if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-            
-            window.location.href = `youtube://www.youtube.com/results?search_query=${searchQuery}`;
-        }
-
-        
-        setTimeout(() => {
-            window.open(`${YOUTUBE_SEARCH_URL}${searchQuery}`, '_blank');
-        }, 800);
-    } else {
-        
-        window.open(`${YOUTUBE_SEARCH_URL}${searchQuery}`, '_blank');
-    }
+    const searchQuery = encodeURIComponent(`${artista} - ${cancion}`);
+    
+    window.open(`${YOUTUBE_SEARCH_URL}${searchQuery}`, '_blank');
+    
 });
