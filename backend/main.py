@@ -23,7 +23,7 @@ app.add_middleware(
 generos = [
     'rock', 'pop', 'hip-hop', 'jazz', 'electronic', 'indie', 'classical', 'reggae', 'metal', 'blues', 'experimental', 'psychedelic', 
     'progressive metal', 'latin', 'math rock', 'shoegaze', 'avant-garde', 'progressive', 'post rock', 'all', 'funk', 'poptron', 'alternative', 'mexico', 'soca', 'salsa', 
-    'romo', 'ska', 'rave', 'spanish'
+    'romo', 'ska', 'rave', 'spanish', 'french', 'italian', 'j-pop', 'j-rock', 'uk', 'russian'
 ]
 
 def obtener_genero_aleatorio():
